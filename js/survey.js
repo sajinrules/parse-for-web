@@ -1,8 +1,8 @@
 $(function() {
     Parse.$ = jQuery;
     Parse.initialize("RdiSw9pfrD9LNaal1WR5OmtCSa3ARuLjma1aZGSv", "ZcUNWegk7FmR8iPSqYwmMt1Y5VCIGavEVkRSZCkj");
- 
-/**
+	
+	/**
 **
 **	View
 **
@@ -118,7 +118,8 @@ $(function() {
 		render: function() {
 			var collection = { 
 				username: this.options.username,
-				fname: this.options.fname
+				fname: this.options.fname,
+				company: this.options.company
 			};
 			this.$el.html(this.template(collection));
 		}
@@ -144,6 +145,7 @@ $(function() {
 				fname: this.options.fname
 			};
 			this.$el.html(this.template(collection));
+			console.log("$('#logged-assessment-tpl'):",$('#logged-assessment-tpl').children());
 		}
 	}),
 
@@ -198,7 +200,8 @@ $(function() {
 				**/
 				var navbarView = new NavbarView({ 
 					username: currentUser.get('username'),
-					fname: currentUser.get('fname')
+					fname: currentUser.get('fname'),
+					company:currentUser.get('company')
 				});
 				navbarView.render();
 				$('.navbar-container').html(navbarView.el);
@@ -248,7 +251,8 @@ $(function() {
 				**/
 				var navbarView = new NavbarView({ 
 					username: currentUser.get('username'),
-					fname: currentUser.get('fname')
+					fname: currentUser.get('fname'),
+					company:currentUser.get('company')
 				});
 				navbarView.render();
 				$('.navbar-container').html(navbarView.el);
