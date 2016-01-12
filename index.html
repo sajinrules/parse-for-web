@@ -156,11 +156,15 @@
 					</div>
 					<ul class="nav navbar-nav navbar-right">
 						{{#if username}}
+						<li>
+							<a href="#/admin/assessment" style="color:white">Start Assessment
+							</a>
+						</li>
 						<li class="dropdown">
 							<a style="color:white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{fname}} <span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#/home">{{username}}</a></li>
+								<li><a href="#/admin/home">{{username}}</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="#/logout">Logout</a></li>
 							</ul>
@@ -181,8 +185,38 @@
 							<img alt="Brand" width="100" src="logo.png">
 						</a>
 					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#/assessment" style="color:white">Start Assessment
+							</a>
+						</li>
+						<li>
+							<a href="#/register" style="color:white">Login / Sign Up
+							</a>
+						</li>
+					</ul>
 				</div>
+
 			</nav>
+		</script>
+
+		<!-- assessment not logged  -->
+		<script id="assessment-tpl" type="text/x-handlebars-template">
+			<div class="jumbotron">
+				<div class="container">
+					<h1>Assessment</h1>
+				</div>
+			</div>
+		</script>
+
+		<!-- assessment logged  -->
+		<script id="logged-assessment-tpl" type="text/x-handlebars-template">
+			<div class="jumbotron">
+				<div class="container">
+					<h1>Assessment</h1>
+					<p>Let Start Assessment {{fname}}</p>
+				</div>
+			</div>
 		</script>
 
 		<!-- survey.js -->

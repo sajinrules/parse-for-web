@@ -21,7 +21,7 @@ $(function() {
 
 			Parse.User.logIn(username, password, {
 				success: function(user) {
-					blogRouter.navigate('#/home', { trigger: true });
+					blogRouter.navigate('#/admin/home', { trigger: true });
 				},
 				error: function(user, error) {
 					alert("Error: "+ error.message);
@@ -66,7 +66,7 @@ $(function() {
 			console.log("user:",user);
 			user.signUp(null, {
 				success: function(user) {
-					blogRouter.navigate('#/home', { trigger: true });
+					blogRouter.navigate('#/admin/home', { trigger: true });
 				},
 				error: function(user, error) {
 					alert("Error: "+ error.message);
@@ -130,7 +130,23 @@ $(function() {
 			this.$el.html(this.template());
 		}
 	}),
-	
+	AssessmentView = Parse.View.extend({
+		template: Handlebars.compile($('#assessment-tpl').html()),
+		render: function() {
+			this.$el.html(this.template());
+		}
+	}),
+	LoggedAssessmentView = Parse.View.extend({
+		template: Handlebars.compile($('#logged-assessment-tpl').html()),
+		render: function() {
+			var collection = { 
+				username: this.options.username,
+				fname: this.options.fname
+			};
+			this.$el.html(this.template(collection));
+		}
+	}),
+
 /**
 **
 **	Route
@@ -159,7 +175,9 @@ $(function() {
 			'': 'login',
 			'register': 'signUp',
 			'password-recovery': 'resetPassword',
-			'home': 'dashboard',
+			'assessment': 'assessment',
+			'admin/home': 'dashboard',
+			'admin/assessment': 'loggedAssessment',
 			'admin': 'admin',
 			'login': 'login',
 			'add': 'add',
@@ -197,6 +215,56 @@ $(function() {
 				$container.html(blogsAdminView.el);
 
 			}
+		},
+		assessment: function() {
+			
+				/*
+				*
+				* navbar not logged render
+				**/
+				var navbarViewNotLogged = new NavbarViewNotLogged();
+				navbarViewNotLogged.render();
+				$('.navbar-container').html(navbarViewNotLogged.el);
+				
+				/*
+				*
+				* Assessment render
+				**/
+				var assessmentView = new AssessmentView();
+				assessmentView.render();
+				$container.html(assessmentView.el);
+
+			
+		},
+		loggedAssessment: function() {
+			var currentUser = Parse.User.current();
+			if (!currentUser) {
+				this.navigate('#/login', { trigger: true });
+			} else {
+			
+				/*
+				*
+				* navbar render
+				**/
+				var navbarView = new NavbarView({ 
+					username: currentUser.get('username'),
+					fname: currentUser.get('fname')
+				});
+				navbarView.render();
+				$('.navbar-container').html(navbarView.el);
+				
+				/*
+				*
+				* Assessment render
+				**/
+				var loggedAssessmentView = new LoggedAssessmentView({ 
+					username: currentUser.get('username'),
+					fname: currentUser.get('fname')
+				});
+				loggedAssessmentView.render();
+				$container.html(loggedAssessmentView.el);
+			}
+			
 		},
 		login: function() {
 			/*
