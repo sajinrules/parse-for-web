@@ -28,7 +28,7 @@ $(function() {
 				}
 			});
 		},
-			render: function(){
+		render: function(){
 			this.$el.html(this.template());
 		}
 	}),
@@ -112,6 +112,24 @@ $(function() {
 			this.$el.html(this.template(collection));
 		}
 	}),
+
+	NavbarView = Parse.View.extend({
+		template: Handlebars.compile($('#navbar-tpl').html()),
+		render: function() {
+			var collection = { 
+				username: this.options.username,
+				fname: this.options.fname
+			};
+			this.$el.html(this.template(collection));
+		}
+	}),
+
+	NavbarViewNotLogged = Parse.View.extend({
+		template: Handlebars.compile($('#navbar-not-logged-tpl').html()),
+		render: function() {
+			this.$el.html(this.template());
+		}
+	}),
 	
 /**
 **
@@ -132,11 +150,7 @@ $(function() {
 				// put in your directory below
 				root: '/'
 			});
-			/*this.categories.fetch().then(function(categories){
-				var categoriesView = new CategoriesView({ collection: categories });
-				categoriesView.render();
-				$('.blog-sidebar').html(categoriesView.el);
-			});*/
+			
 		},
 			
 		// This is where you map functions to urls.
@@ -160,25 +174,78 @@ $(function() {
 			if (!currentUser) {
 				this.navigate('#/login', { trigger: true });
 			} else {
+				/*
+				*
+				* navbar render
+				**/
+				var navbarView = new NavbarView({ 
+					username: currentUser.get('username'),
+					fname: currentUser.get('fname')
+				});
+				navbarView.render();
+				$('.navbar-container').html(navbarView.el);
+				
+				/*
+				*
+				* Admin panel render
+				**/
 				var blogsAdminView = new BlogsAdminView({ 
 					username: currentUser.get('username'),
 					message: "Welcome "+currentUser.get('username')+ "!"
 				});
 				blogsAdminView.render();
 				$container.html(blogsAdminView.el);
+
 			}
 		},
 		login: function() {
+			/*
+			*
+			* navbar not logged render
+			**/
+			var navbarViewNotLogged = new NavbarViewNotLogged();
+			navbarViewNotLogged.render();
+			$('.navbar-container').html(navbarViewNotLogged.el);
+			
+			/*
+			*
+			* Login view render
+			**/
 			var loginView = new LoginView();
 			loginView.render();
 			$container.html(loginView.el);
+
 		},
 		signUp: function() {
+			/*
+			*
+			* navbar not logged render
+			**/
+			var navbarViewNotLogged = new NavbarViewNotLogged();
+			navbarViewNotLogged.render();
+			$('.navbar-container').html(navbarViewNotLogged.el);
+			
+			/*
+			*
+			* Sign up view render
+			**/
 			var signUpView = new SignUpView();
 			signUpView.render();
 			$container.html(signUpView.el);
 		},
 		resetPassword: function() {
+			/*
+			*
+			* navbar not logged render
+			**/
+			var navbarViewNotLogged = new NavbarViewNotLogged();
+			navbarViewNotLogged.render();
+			$('.navbar-container').html(navbarViewNotLogged.el);
+			
+			/*
+			*
+			* password reset view view render
+			**/
 			var passResetView = new PassResetView();
 			passResetView.render();
 			$container.html(passResetView.el);
