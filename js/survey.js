@@ -14,25 +14,17 @@ $(function() {
 			'submit #form-sign-in': 'login'
 		},
 		login: function(e) {
-
-			// Prevent Default Submit Event
 			e.preventDefault();
-
-			// Get data from the form and put them into variables
 			var data = $("#form-sign-in").serializeArray(),
 				username = data[0].value,
 				password = data[1].value;
 
-			// Call Parse Login function with those variables
 			Parse.User.logIn(username, password, {
-				// If the username and password matches
 				success: function(user) {
 					blogRouter.navigate('#/home', { trigger: true });
 				},
-				// If there is an error
 				error: function(user, error) {
-					alert(error);
-					blogRouter.navigate('#/register', { trigger: true });
+					alert("Error: "+ error.message);
 				}
 			});
 		},
@@ -50,29 +42,34 @@ $(function() {
 			e.preventDefault();
 			var currentUser = Parse.User.current();
                 if (currentUser) {
-                    // do stuff with the user
                     Parse.User.logOut();
                 }
 			// Get data from the form and put them into variables
 			var data = $("#formSignUp").serializeArray(),
-				Name = data[0].value,
-				username = data[1].value,
+				fname = data[0].value,
+				lname = data[1].value,
 				email = data[2].value,
-				password = data[3].value;
-							
+				company = data[3].value;
+				jobtitle = data[4].value;
+				password = data[5].value;
+				Name = fname+" "+lname;
+			
 			var user = new Parse.User();
-			user.set("username",username);
-			user.set("password",password);
-			user.set("email",email);
 			user.set("Name",Name);
+			user.set("fname",fname);
+			user.set("lname",lname);
+			user.set("email",email);
+			user.set("username",email);
+			user.set("company",company);
+			user.set("jobtitle",jobtitle);
+			user.set("password",password);
+			console.log("user:",user);
 			user.signUp(null, {
 				success: function(user) {
-					this.navigate('#/home', { trigger: true });
-					// Hooray! Let them use the app now.
+					blogRouter.navigate('#/home', { trigger: true });
 				},
 				error: function(user, error) {
-				// Show the error message somewhere and let the user try again.
-				alert("Error: " + error.code + " " + error.message);
+					alert("Error: "+ error.message);
 				}
 			});
 		},
@@ -137,9 +134,7 @@ $(function() {
 			if (!currentUser) {
 				this.navigate('#/login', { trigger: true });
 			} else {
-				//console.log("currentUser:",currentUser.get('username'));
 				var blogsAdminView = new BlogsAdminView({ 
-					// Pass in current username to be rendered in #admin-tpl
 					username: currentUser.get('username'),
 					message: "Welcome "+currentUser.get('username')+ "!"
 				});
