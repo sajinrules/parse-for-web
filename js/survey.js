@@ -77,6 +77,31 @@ $(function() {
 			this.$el.html(this.template());
 		}
 	}),
+
+	PassResetView = Parse.View.extend({
+		template: Handlebars.compile($('#resetpass-tpl').html()),
+		events: {
+			'submit #form-reset-pass': 'resetPassword'
+		},
+		resetPassword: function(e) {
+			e.preventDefault();
+			var data = $("#form-reset-pass").serializeArray(),
+				email = data[0].value;
+			
+			Parse.User.requestPasswordReset(email, {
+				success: function(data) {
+					blogRouter.navigate('#/login', { trigger: true });
+				},
+				error: function(error) {
+					alert("Error: " + error.code + " " + error.message);
+				}
+			});
+		},
+			render: function(){
+			this.$el.html(this.template());
+		}
+	}),
+	
 	BlogsAdminView = Parse.View.extend({
 		template: Handlebars.compile($('#dahsboard-tpl').html()),
 		render: function() {
@@ -119,6 +144,7 @@ $(function() {
 		routes: {
 			'': 'login',
 			'register': 'signUp',
+			'password-recovery': 'resetPassword',
 			'home': 'dashboard',
 			'admin': 'admin',
 			'login': 'login',
@@ -152,6 +178,12 @@ $(function() {
 			signUpView.render();
 			$container.html(signUpView.el);
 		},
+		resetPassword: function() {
+			var passResetView = new PassResetView();
+			passResetView.render();
+			$container.html(passResetView.el);
+		},
+
 		logout: function () {
 			Parse.User.logOut();
 			this.navigate('#/login', { trigger: true });

@@ -64,7 +64,7 @@
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
-								<span class="pull-right"><a href="#/register">Register</a></span><span><a href="#">Need help?</a></span>
+								<span class="pull-right"><a href="#/register">Register</a></span><span><a href="#/password-recovery">forgot password?</a></span>
 							</div>
 						</form>
 					</div>
@@ -126,6 +126,33 @@
 
 				<h1>Helloon</h1>
 					<p>Welcome {{username}} !</p>
+				</div>
+			</div>
+		</script>
+
+		<!-- reset password  -->
+		<script id="resetpass-tpl" type="text/x-handlebars-template">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="text-center">Reset Password</h1>
+					</div>
+					<div class="modal-body">
+						<form id="form-reset-pass" class="form col-md-12 center-block">
+							<div class="form-group">
+								<input type="text" class="form-control input-lg" name="email" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-lg btn-block">Send
+								</button>
+								<span class="pull-right"><a href="#/login">Login</a>
+								</span>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+							
+					</div>
 				</div>
 			</div>
 		</script>
