@@ -8,100 +8,7 @@ $(function() {
 **
 ***/
 	var $container = $('.main-container'),
-	LoginView = Parse.View.extend({
-		template: Handlebars.compile($('#login-tpl').html()),
-		events: {
-			'submit #form-sign-in': 'login'
-		},
-		login: function(e) {
-			e.preventDefault();
-			var data = $("#form-sign-in").serializeArray(),
-				username = data[0].value,
-				password = data[1].value;
-
-			Parse.User.logIn(username, password, {
-				success: function(user) {
-					blogRouter.navigate('#/admin/home', { trigger: true });
-				},
-				error: function(user, error) {
-					alert("Error: "+ error.message);
-				}
-			});
-		},
-		render: function(){
-			this.$el.html(this.template());
-		}
-	}),
-
-	SignUpView = Parse.View.extend({
-		template: Handlebars.compile($('#sign-up-tpl').html()),
-		events: {
-			'submit #formSignUp': 'signUp'
-		},
-		signUp: function(e) {
-			e.preventDefault();
-			var currentUser = Parse.User.current();
-                if (currentUser) {
-                    Parse.User.logOut();
-                }
-			// Get data from the form and put them into variables
-			var data = $("#formSignUp").serializeArray(),
-				fname = data[0].value,
-				lname = data[1].value,
-				email = data[2].value,
-				company = data[3].value;
-				jobtitle = data[4].value;
-				password = data[5].value;
-				Name = fname+" "+lname;
-			
-			var user = new Parse.User();
-			user.set("Name",Name);
-			user.set("fname",fname);
-			user.set("lname",lname);
-			user.set("email",email);
-			user.set("username",email);
-			user.set("company",company);
-			user.set("jobtitle",jobtitle);
-			user.set("password",password);
-			console.log("user:",user);
-			user.signUp(null, {
-				success: function(user) {
-					blogRouter.navigate('#/admin/home', { trigger: true });
-				},
-				error: function(user, error) {
-					alert("Error: "+ error.message);
-				}
-			});
-		},
-			render: function(){
-			this.$el.html(this.template());
-		}
-	}),
-
-	PassResetView = Parse.View.extend({
-		template: Handlebars.compile($('#resetpass-tpl').html()),
-		events: {
-			'submit #form-reset-pass': 'resetPassword'
-		},
-		resetPassword: function(e) {
-			e.preventDefault();
-			var data = $("#form-reset-pass").serializeArray(),
-				email = data[0].value;
-			
-			Parse.User.requestPasswordReset(email, {
-				success: function(data) {
-					blogRouter.navigate('#/login', { trigger: true });
-				},
-				error: function(error) {
-					alert("Error: " + error.code + " " + error.message);
-				}
-			});
-		},
-			render: function(){
-			this.$el.html(this.template());
-		}
-	}),
-	
+	$loginModal = $("#loginModal"),
 	BlogsAdminView = Parse.View.extend({
 		template: Handlebars.compile($('#dahsboard-tpl').html()),
 		render: function() {
@@ -127,6 +34,82 @@ $(function() {
 
 	NavbarViewNotLogged = Parse.View.extend({
 		template: Handlebars.compile($('#navbar-not-logged-tpl').html()),
+		events: {
+			'submit #form-sign-in': 'login',
+			'submit #formSignUp': 'signUp',
+			'submit #form-reset-pass': 'resetPassword'
+		},
+		login: function(e) {
+			//console.log("e:",e);
+			e.preventDefault();
+			var data = $("#form-sign-in").serializeArray(),
+				username = data[0].value,
+				password = data[1].value;
+
+			Parse.User.logIn(username, password, {
+				success: function(user) {
+					$(".modal-backdrop").css("display", "none");
+					blogRouter.navigate('#/admin/home', { trigger: true });
+				},
+				error: function(user, error) {
+					if(error.code===101)
+						alert("The email and password you entered don't match. Please reset your password if needed.");
+					else
+						alert(error.message);
+				}
+			});
+		},
+		signUp: function(e) {
+			//console.log("e:",e);
+			e.preventDefault();
+			var currentUser = Parse.User.current();
+                if (currentUser) {
+                    Parse.User.logOut();
+                }
+			// Get data from the form and put them into variables
+			var data = $("#formSignUp").serializeArray(),
+				fname = data[0].value,
+				lname = data[1].value,
+				email = data[2].value,
+				company = data[3].value;
+				jobtitle = data[4].value;
+				password = data[5].value;
+				Name = fname+" "+lname;
+			
+			var user = new Parse.User();
+			user.set("Name",Name);
+			user.set("fname",fname);
+			user.set("lname",lname);
+			user.set("email",email);
+			user.set("username",email);
+			user.set("company",company);
+			user.set("jobtitle",jobtitle);
+			user.set("password",password);
+			user.signUp(null, {
+				success: function(user) {
+					$(".modal-backdrop").css("display", "none");
+					blogRouter.navigate('#/admin/home', { trigger: true });
+				},
+				error: function(user, error) {
+					alert("Error: "+ error.message);
+				}
+			});
+		},
+		resetPassword: function(e) {
+			e.preventDefault();
+			var data = $("#form-reset-pass").serializeArray(),
+				email = data[0].value;
+			
+			Parse.User.requestPasswordReset(email, {
+				success: function(data) {
+					$(".modal-backdrop").css("display", "none");
+					blogRouter.navigate('#/', { trigger: true });
+				},
+				error: function(error) {
+					alert("Error: " + error.code + " " + error.message);
+				}
+			});
+		},
 		render: function() {
 			this.$el.html(this.template());
 		}
@@ -174,14 +157,11 @@ $(function() {
 		// This is where you map functions to urls.
 		// Just add '{{URL pattern}}': '{{function name}}'
 		routes: {
-			'': 'login',
-			'register': 'signUp',
-			'password-recovery': 'resetPassword',
+			'': 'assessment',
 			'assessment': 'assessment',
 			'admin/home': 'dashboard',
 			'admin/assessment': 'loggedAssessment',
 			'admin': 'admin',
-			'login': 'login',
 			'add': 'add',
 			'edit/:id': 'edit',
 			'del/:id': 'del',
@@ -192,7 +172,7 @@ $(function() {
 		dashboard: function() {
 			var currentUser = Parse.User.current();
 			if (!currentUser) {
-				this.navigate('#/login', { trigger: true });
+				this.navigate('#/', { trigger: true });
 			} else {
 				/*
 				*
@@ -242,7 +222,7 @@ $(function() {
 		loggedAssessment: function() {
 			var currentUser = Parse.User.current();
 			if (!currentUser) {
-				this.navigate('#/login', { trigger: true });
+				this.navigate('#/', { trigger: true });
 			} else {
 			
 				/*
@@ -270,62 +250,9 @@ $(function() {
 			}
 			
 		},
-		login: function() {
-			/*
-			*
-			* navbar not logged render
-			**/
-			var navbarViewNotLogged = new NavbarViewNotLogged();
-			navbarViewNotLogged.render();
-			$('.navbar-container').html(navbarViewNotLogged.el);
-			
-			/*
-			*
-			* Login view render
-			**/
-			var loginView = new LoginView();
-			loginView.render();
-			$container.html(loginView.el);
-
-		},
-		signUp: function() {
-			/*
-			*
-			* navbar not logged render
-			**/
-			var navbarViewNotLogged = new NavbarViewNotLogged();
-			navbarViewNotLogged.render();
-			$('.navbar-container').html(navbarViewNotLogged.el);
-			
-			/*
-			*
-			* Sign up view render
-			**/
-			var signUpView = new SignUpView();
-			signUpView.render();
-			$container.html(signUpView.el);
-		},
-		resetPassword: function() {
-			/*
-			*
-			* navbar not logged render
-			**/
-			var navbarViewNotLogged = new NavbarViewNotLogged();
-			navbarViewNotLogged.render();
-			$('.navbar-container').html(navbarViewNotLogged.el);
-			
-			/*
-			*
-			* password reset view view render
-			**/
-			var passResetView = new PassResetView();
-			passResetView.render();
-			$container.html(passResetView.el);
-		},
-
 		logout: function () {
 			Parse.User.logOut();
-			this.navigate('#/login', { trigger: true });
+			this.navigate('#/', { trigger: true });
 		}
 	}),
 	blogRouter = new BlogRouter();

@@ -47,7 +47,7 @@
 						<h1 class="text-center">Login</h1>
 					</div>
 					<div class="modal-body">
-						<form id="form-sign-in" class="form col-md-12 center-block">
+						<form id="form-sign-in-2" class="form col-md-12 center-block">
 							<div class="form-group">
 								<input type="text" class="form-control input-lg" name="username" placeholder="Email">
 							</div>
@@ -186,6 +186,7 @@
 						<a class="navbar-brand" href="#">
 							<img alt="Brand" width="100" src="logo.png">
 						</a>
+						<p class="navbar-text navbar-left" style="color:white">Benchmarking Centre</p>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
@@ -193,13 +194,127 @@
 							</a>
 						</li>
 						<li>
-							<a href="#/register" style="color:white">Login / Sign Up
+							<a id="open-login" data-toggle="modal" data-target="#loginModal" style="color:white;float:left;padding-right:0px">Login /
+							</a>
+							<a data-toggle="modal" data-target="#SignUpModal" style="color:white;float:left;padding-left:0px">&nbspSign Up
 							</a>
 						</li>
+						
 					</ul>
 				</div>
 
 			</nav>
+			
+			<!-- Login Modal -->
+			<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h1 class="text-center">Login</h1>
+						</div>
+						<div class="modal-body">
+							<form id="form-sign-in" class="form col-md-12 center-block">
+								<div class="form-group">
+									<input type="text" class="form-control input-lg" name="username" placeholder="Email">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control input-lg" name="password" placeholder="Password">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+									<span class="pull-right">
+										<a data-toggle="modal" data-target="#SignUpModal" data-dismiss="modal" aria-hidden="true">&nbspSign Up
+										</a>
+									</span>
+									<span>
+										<a data-toggle="modal" data-target="#recoveryPasswordModal" data-dismiss="modal" aria-hidden="true">forgot password?
+										</a>
+									</span>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+								
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Sign Up Modal -->
+			<div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h1 class="text-center">Sign Up</h1>
+						</div>
+						<div class="modal-body">
+							<form id="formSignUp" class="form col-md-12 center-block" role="form">
+								<div class="form-group">
+									<input type="text" class="form-control input-lg" name="fname" placeholder="First Name">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control input-lg" name="lname" placeholder="Last Name">
+								</div>
+								<div class="form-group">
+									<input type="email" class="form-control input-lg" name="email" placeholder="Email">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control input-lg" name="company" placeholder="Company">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control input-lg" name="jobtitle" placeholder="Job title">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control input-lg" name="password" placeholder="Password">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
+									<span class="pull-right">
+										<a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" aria-hidden="true">Sign In
+										</a>
+									</span>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+								
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Recovery Password Modal -->
+			<div class="modal fade" id="recoveryPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="text-center">Reset Password</h1>
+						</div>
+						<div class="modal-body">
+							<form id="form-reset-pass" class="form col-md-12 center-block">
+								<div class="form-group">
+									<input type="text" class="form-control input-lg" name="email" placeholder="Email">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-lg btn-block">Send
+									</button>
+									<span class="pull-right">
+										<a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" aria-hidden="true">Sign In
+										</a>
+									</span>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+								
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</script>
 
 		<!-- assessment not logged  -->
@@ -459,6 +574,10 @@
 				var myBarChart = new Chart(ctx4).Bar(data,{barShowStroke: false});
 			</script>
 		</script>
+
+		
+
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
 		
