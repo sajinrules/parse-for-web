@@ -49,6 +49,7 @@ $(function() {
 			Parse.User.logIn(username, password, {
 				success: function(user) {
 					$(".modal-backdrop").css("display", "none");
+					$("body").css("overflow", "auto");
 					blogRouter.navigate('#/admin/home', { trigger: true });
 				},
 				error: function(user, error) {

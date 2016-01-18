@@ -18,13 +18,16 @@
 				margin-bottom: 0px !important;
 				background-color:#337ab7
 			}
+			/*html{
+				overflow-y: scroll;
+			}*/
 			
 		</style>
 	</head>
 	<body>
 
 		<div class="navbar-container"></div>
-		<div class="main-container" style="width: 85%;margin: 0px auto;"></div>
+		<div class="main-container" style="width: 85%;margin: 0px auto;overflow:auto"></div>
 		
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -327,7 +330,7 @@
 		</script>
 
 		<!-- assessment logged  -->
-		<script id="logged-assessment-tpl" type="text/x-handlebars-template">
+		<script id="logged-assessment-tpl" data-scrollable="y" type="text/x-handlebars-template">
 			<div class="jumbotron">
 				<div class="container">
 					<h2>Assessment</h2>
@@ -579,7 +582,6 @@
 
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-
 		
 		<!-- survey.js -->
 		<script src="js/survey.js"></script>
