@@ -18,16 +18,161 @@
 				margin-bottom: 0px !important;
 				background-color:#337ab7
 			}
-			/*html{
-				overflow-y: scroll;
-			}*/
+			/** The Magic **/
+.btn-breadcrumb .btn:not(:last-child):after {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  border-left: 10px solid white;
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+  left: 100%;
+  z-index: 3;
+}
+.btn-breadcrumb .btn:not(:last-child):before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  border-left: 10px solid rgb(173, 173, 173);
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+  margin-left: 1px;
+  left: 100%;
+  z-index: 3;
+}
+
+/** The Spacing **/
+.btn-breadcrumb .btn {
+  padding:6px 12px 6px 24px;
+}
+.btn-breadcrumb .btn:first-child {
+  padding:6px 6px 6px 10px;
+}
+.btn-breadcrumb .btn:last-child {
+  padding:6px 18px 6px 24px;
+}
+
+/** Default button **/
+.btn-breadcrumb .btn.btn-default:not(:last-child):after {
+  border-left: 10px solid #fff;
+}
+.btn-breadcrumb .btn.btn-default:not(:last-child):before {
+  border-left: 10px solid #ccc;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):after {
+  border-left: 10px solid #ebebeb;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):before {
+  border-left: 10px solid #adadad;
+}
+
+/** Primary button **/
+.btn-breadcrumb .btn.btn-primary:not(:last-child):after {
+  border-left: 10px solid #428bca;
+}
+.btn-breadcrumb .btn.btn-primary:not(:last-child):before {
+  border-left: 10px solid #357ebd;
+}
+.btn-breadcrumb .btn.btn-primary:hover:not(:last-child):after {
+  border-left: 10px solid #3276b1;
+}
+.btn-breadcrumb .btn.btn-primary:hover:not(:last-child):before {
+  border-left: 10px solid #285e8e;
+}
+
+/** Success button **/
+.btn-breadcrumb .btn.btn-success:not(:last-child):after {
+  border-left: 10px solid #5cb85c;
+}
+.btn-breadcrumb .btn.btn-success:not(:last-child):before {
+  border-left: 10px solid #4cae4c;
+}
+.btn-breadcrumb .btn.btn-success:hover:not(:last-child):after {
+  border-left: 10px solid #47a447;
+}
+.btn-breadcrumb .btn.btn-success:hover:not(:last-child):before {
+  border-left: 10px solid #398439;
+}
+
+/** Danger button **/
+.btn-breadcrumb .btn.btn-danger:not(:last-child):after {
+  border-left: 10px solid #d9534f;
+}
+.btn-breadcrumb .btn.btn-danger:not(:last-child):before {
+  border-left: 10px solid #d43f3a;
+}
+.btn-breadcrumb .btn.btn-danger:hover:not(:last-child):after {
+  border-left: 10px solid #d2322d;
+}
+.btn-breadcrumb .btn.btn-danger:hover:not(:last-child):before {
+  border-left: 10px solid #ac2925;
+}
+
+/** Warning button **/
+.btn-breadcrumb .btn.btn-warning:not(:last-child):after {
+  border-left: 10px solid #f0ad4e;
+}
+.btn-breadcrumb .btn.btn-warning:not(:last-child):before {
+  border-left: 10px solid #eea236;
+}
+.btn-breadcrumb .btn.btn-warning:hover:not(:last-child):after {
+  border-left: 10px solid #ed9c28;
+}
+.btn-breadcrumb .btn.btn-warning:hover:not(:last-child):before {
+  border-left: 10px solid #d58512;
+}
+
+/** Info button **/
+.btn-breadcrumb .btn.btn-info:not(:last-child):after {
+  border-left: 10px solid #5bc0de;
+}
+.btn-breadcrumb .btn.btn-info:not(:last-child):before {
+  border-left: 10px solid #46b8da;
+}
+.btn-breadcrumb .btn.btn-info:hover:not(:last-child):after {
+  border-left: 10px solid #39b3d7;
+}
+.btn-breadcrumb .btn.btn-info:hover:not(:last-child):before {
+  border-left: 10px solid #269abc;
+}
+.footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+   Set the fixed height of the footer here 
+  height: 60px;
+  background-color: #eee;
+  
+  /*height: 60px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #eee;
+  z-index: 150;*/
+  
+}
 			
 		</style>
 	</head>
 	<body>
 
 		<div class="navbar-container"></div>
-		<div class="main-container" style="width: 85%;margin: 0px auto;overflow:auto"></div>
+		<div class="main-container container-fluid"></div>
+		<footer class="footer" style="background-color:337ab7">
+			<div class="container-fluid">
+			<p class="text-muted">Place sticky footer content here.</p>
+			</div>
+		</footer>
 		
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -117,6 +262,80 @@
 				<div class="container">
 					<h1>Helloon</h1>
 					<p>Welcome {{username}} !</p>
+				</div>
+			</div>
+		</script>
+
+		<!-- survey  -->
+		<script id="survey-tpl" type="text/x-handlebars-template">
+			<div class="container-fluid" style="">
+				<div class="row">
+				    <div class="btn-group btn-breadcrumb">
+				        <!--  
+			            <a href="#" class="btn btn-default">
+			            	<i class="glyphicon glyphicon-home"></i>
+			            	</a>-->
+			            <a href="#" class="btn btn-default cat" value="category1">Category 1</a>
+			            <a href="#" class="btn btn-default cat">Category 2</a>
+			            <a href="#" class="btn btn-default cat">Category 3</a>
+			            <a href="#" class="btn btn-default cat">Category 4</a>
+			            <a href="#" class="btn btn-default cat">Category 5</a>
+			            <a href="#" class="btn btn-default cat">Category 6</a>
+			        </div>
+				</div>
+				<div class="row" style="margin-top:10px">
+					<div class="list-group">
+						<a href="#" class="list-group-item active">
+						<h4 class="list-group-item-heading">Category 1</h4>
+						<p class="list-group-item-text">
+							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+						</p>
+						</a>
+					</div>
+					<div class="container-fluid">
+						<strong>
+							<p> 2. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+							</p>
+						</strong>
+						<div class="container-fluid" style="">
+							<div class="list-group">
+								<button type="button" class="list-group-item">
+								1. Cras justo odio
+								</button>
+								
+								<button type="button" class="list-group-item">
+								2. Dapibus ac facilisis in</button>
+								
+								<button type="button" class="list-group-item">
+								3. Morbi leo risus</button>
+								
+								<button type="button" class="list-group-item">
+								4. Porta ac consectetur ac</button>
+								
+								<button type="button" class="list-group-item">
+								5. Vestibulum at eros</button>
+							</div>
+						</div>
+					</div> 
+					<nav class="text-right">
+						<ul class="pagination">
+							<li>
+								<a href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li>
+							<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+							</li>
+						</ul>
+					</nav>	
 				</div>
 			</div>
 		</script>

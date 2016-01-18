@@ -3,11 +3,152 @@ $(function() {
     Parse.initialize("RdiSw9pfrD9LNaal1WR5OmtCSa3ARuLjma1aZGSv", "ZcUNWegk7FmR8iPSqYwmMt1Y5VCIGavEVkRSZCkj");
 	
 	/**
-**
-**	View
-**
-***/
+	**
+	**	View
+	**
+	***/
 	var $container = $('.main-container'),
+	qc =[
+			{
+				"category1":{
+					'description':'1 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+					'questions' : [
+						{
+							'question':'JavaScript Multiple Choice Questions and Answers',
+							'choice' : [
+										'JavaScript is a stripped-down version of Java',
+										'JavaScripts syntax is loosely based on Javas',
+										'They both originated on the island of Java',
+										'None of the above'
+							]
+						},{
+							'question':'When a user views a page containing a JavaScript program, which machine actually executes the script?',
+							'choice' : [
+										'The Users machine running a Web browser',
+										'The Web server',
+										'A central machine deep within Netscapes corporate offices',
+										'None of the above'
+							]
+						},{
+							'question':'______ JavaScript is also called client-side JavaScript.',
+							'choice' : [
+										'Microsoft',
+										'Navigator',
+										'LiveWire',
+										'Native'
+							]
+						},{
+							'question':'__________ JavaScript is also called server-side JavaScript.',
+							'choice' : [
+										'Microsoft',
+										'Navigator',
+										'LiveWire',
+										'Native'
+							]
+						},{
+							'question':'What are variables used for in JavaScript Programs?',
+							'choice' : [
+										'Storing numbers, dates, or other values',
+										'Varying randomly',
+										'Causing high-school algebra flashbacks',
+										' None of the above'
+							]
+						}
+					]
+				}
+			},{
+				"category2":{
+					'description':'2 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+					'questions':[
+						{
+							'question':'_____ JavaScript statements embedded in an HTML page can respond to user events such as mouse-clicks, form input, and page navigation.',
+							'choice' : [
+										'Client-side',
+										'Server-side',
+										'Local',
+										'Native'
+							]
+						},{
+							'question':'What should appear at the very end of your JavaScript?.The <script LANGUAGE="JavaScript">tag',
+							'choice' : [
+										'The </script>',
+										' The <script>',
+										'The END statement',
+										'None of the above'
+							]
+						},{
+							'question':'Which of the following cant be done with client-side JavaScript?',
+							'choice' : [
+										'Validating a form',
+										'Sending a forms contents by email',
+										'Storing the forms contents to a database file on the server',
+										'None of the above'
+							]
+						},{
+							'question':'Which of the following are capabilities of functions in JavaScript?',
+							'choice' : [
+										'Return a value',
+										'Accept parameters and Return a value',
+										'Accept parameters',
+										'None of the above'
+							]
+						},{
+							'question':'Which of the following is not a valid JavaScript variable name?',
+							'choice' : [
+										'2names',
+										'_first_and_last_names',
+										'FirstAndLast',
+										'None of the above'
+							]
+						}
+					]
+				}
+			}
+		],
+	categories=['category1','category2'],
+	qa =[
+		{
+			'question':'JavaScript Multiple Choice Questions and Answers',
+			'choice' : [
+						'JavaScript is a stripped-down version of Java',
+						'JavaScripts syntax is loosely based on Javas',
+						'They both originated on the island of Java',
+						'None of the above'
+			]
+		},{
+			'question':'When a user views a page containing a JavaScript program, which machine actually executes the script?',
+			'choice' : [
+						'The Users machine running a Web browser',
+						'The Web server',
+						'A central machine deep within Netscapes corporate offices',
+						'None of the above'
+			]
+		},{
+			'question':'______ JavaScript is also called client-side JavaScript.',
+			'choice' : [
+						'Microsoft',
+						'Navigator',
+						'LiveWire',
+						'Native'
+			]
+		},{
+			'question':'__________ JavaScript is also called server-side JavaScript.',
+			'choice' : [
+						'Microsoft',
+						'Navigator',
+						'LiveWire',
+						'Native'
+			]
+		},{
+			'question':'What are variables used for in JavaScript Programs?',
+			'choice' : [
+						'Storing numbers, dates, or other values',
+						'Varying randomly',
+						'Causing high-school algebra flashbacks',
+						' None of the above'
+			]
+		}
+	],
 	$loginModal = $("#loginModal"),
 	BlogsAdminView = Parse.View.extend({
 		template: Handlebars.compile($('#dahsboard-tpl').html()),
@@ -19,6 +160,25 @@ $(function() {
 			this.$el.html(this.template(collection));
 		}
 	}),
+
+	SurveyView = Parse.View.extend({
+		template: Handlebars.compile($('#survey-tpl').html()),
+		events:{
+			'click a.cat' : 'catSelect'
+		},
+		catSelect: function(e){
+			console.log("this:",$(this));
+			console.log("e:",$(e.target).text());
+			e.preventDefault();
+		},
+		render: function() {
+			var collection = { 
+				questions: this.options.questions
+			};
+			this.$el.html(this.template(collection));
+		}
+	}),
+
 
 	NavbarView = Parse.View.extend({
 		template: Handlebars.compile($('#navbar-tpl').html()),
@@ -115,12 +275,14 @@ $(function() {
 			this.$el.html(this.template());
 		}
 	}),
+	
 	AssessmentView = Parse.View.extend({
 		template: Handlebars.compile($('#assessment-tpl').html()),
 		render: function() {
 			this.$el.html(this.template());
 		}
 	}),
+	
 	LoggedAssessmentView = Parse.View.extend({
 		template: Handlebars.compile($('#logged-assessment-tpl').html()),
 		render: function() {
@@ -159,6 +321,7 @@ $(function() {
 		// Just add '{{URL pattern}}': '{{function name}}'
 		routes: {
 			'': 'assessment',
+			'survey': 'survey',
 			'assessment': 'assessment',
 			'admin/home': 'dashboard',
 			'admin/assessment': 'loggedAssessment',
@@ -201,24 +364,40 @@ $(function() {
 			}
 		},
 		assessment: function() {
+			/*
+			*
+			* navbar not logged render
+			**/
+			var navbarViewNotLogged = new NavbarViewNotLogged();
+			navbarViewNotLogged.render();
+			$('.navbar-container').html(navbarViewNotLogged.el);
 			
-				/*
-				*
-				* navbar not logged render
-				**/
-				var navbarViewNotLogged = new NavbarViewNotLogged();
-				navbarViewNotLogged.render();
-				$('.navbar-container').html(navbarViewNotLogged.el);
-				
-				/*
-				*
-				* Assessment render
-				**/
-				var assessmentView = new AssessmentView();
-				assessmentView.render();
-				$container.html(assessmentView.el);
-
+			/*
+			*
+			* Assessment render
+			**/
+			var assessmentView = new AssessmentView();
+			assessmentView.render();
+			$container.html(assessmentView.el);
+		},
+		survey : function(){
+			/*
+			*
+			* navbar not logged render
+			**/
+			var navbarViewNotLogged = new NavbarViewNotLogged();
+			navbarViewNotLogged.render();
+			$('.navbar-container').html(navbarViewNotLogged.el);
 			
+			/*
+			*
+			* Assessment render
+			**/
+			var surveyView = new SurveyView({
+				questions:qc
+			});
+			surveyView.render();
+			$container.html(surveyView.el);
 		},
 		loggedAssessment: function() {
 			var currentUser = Parse.User.current();
@@ -249,7 +428,6 @@ $(function() {
 				loggedAssessmentView.render();
 				$container.html(loggedAssessmentView.el);
 			}
-			
 		},
 		logout: function () {
 			Parse.User.logOut();
