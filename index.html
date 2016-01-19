@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Survey</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Survey</title>
  
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		<style type="text/css">
-			.modal-footer {
-				border-top: 0px; 
-			}
-			.custom-nav{
-				border-color: none !important;
-				border-radius: 0px !important;
-				margin-bottom: 0px !important;
-				background-color:#337ab7
-			}
-			/** The Magic **/
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <style type="text/css">
+            .modal-footer {
+                border-top: 0px; 
+            }
+            .custom-nav{
+                border-color: none !important;
+                border-radius: 0px !important;
+                margin-bottom: 0px !important;
+                background-color:#337ab7
+            }
+            /** The Magic **/
 .btn-breadcrumb .btn:not(:last-child):after {
   content: " ";
   display: block;
@@ -161,648 +161,647 @@
   z-index: 150;*/
   
 }
-			
-		</style>
-	</head>
-	<body>
+            
+        </style>
+    </head>
+    <body>
 
-		<div class="navbar-container"></div>
-		<div class="main-container container-fluid"></div>
-		<footer class="footer" style="background-color:337ab7">
-			<div class="container-fluid">
-			<p class="text-muted">Place sticky footer content here.</p>
-			</div>
-		</footer>
-		
+        <div class="navbar-container"></div>
+        <div class="main-container container-fluid"></div>
+        <footer class="footer" style="background-color:337ab7">
+            <div class="container-fluid">
+            <p class="text-muted">Place sticky footer content here.</p>
+            </div>
+        </footer>
+        
 
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
-		</script>
-		 <script src="//www.parsecdn.com/js/parse-1.2.19.min.js"></script>
-		<!-- Handlebars.js -->
-		<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	
-	<!-- Templates-->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+        </script>
+         <script src="//www.parsecdn.com/js/parse-1.2.19.min.js"></script>
+        <!-- Handlebars.js -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    
+    <!-- Templates-->
 
-		<!-- Login -->
-		<script id="login-tpl" type="text/x-handlebars-template">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h1 class="text-center">Login</h1>
-					</div>
-					<div class="modal-body">
-						<form id="form-sign-in-2" class="form col-md-12 center-block">
-							<div class="form-group">
-								<input type="text" class="form-control input-lg" name="username" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control input-lg" name="password" placeholder="Password">
-							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
-								<span class="pull-right"><a href="#/register">Register</a></span><span><a href="#/password-recovery">forgot password?</a></span>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-							
-					</div>
-				</div>
-			</div>
-		</script>
-		
-		<!-- Sign Up -->
-		<script id="sign-up-tpl" type="text/x-handlebars-template">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h1 class="text-center">Sign Up</h1>
-					</div>
-					<div class="modal-body">
-						<form id="formSignUp" class="form col-md-12 center-block" role="form">
-							<div class="form-group">
-								<input type="text" class="form-control input-lg" name="fname" placeholder="First Name">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control input-lg" name="lname" placeholder="Last Name">
-							</div>
-							<div class="form-group">
-								<input type="email" class="form-control input-lg" name="email" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control input-lg" name="company" placeholder="Company">
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control input-lg" name="jobtitle" placeholder="Job title">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control input-lg" name="password" placeholder="Password">
-							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
-								<span class="pull-right"><a href="#/">Sign In</a></span><span><a href="#">Need help?</a></span>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-							
-					</div>
-				</div>
-			</div>
-		</script>
+        <!-- Login -->
+        <script id="login-tpl" type="text/x-handlebars-template">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h1 class="text-center">Login</h1>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-sign-in-2" class="form col-md-12 center-block">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg" name="username" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control input-lg" name="password" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+                                <span class="pull-right"><a href="#/register">Register</a></span><span><a href="#/password-recovery">forgot password?</a></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                            
+                    </div>
+                </div>
+            </div>
+        </script>
+        
+        <!-- Sign Up -->
+        <script id="sign-up-tpl" type="text/x-handlebars-template">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h1 class="text-center">Sign Up</h1>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formSignUp" class="form col-md-12 center-block" role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg" name="fname" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg" name="lname" placeholder="Last Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control input-lg" name="email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg" name="company" placeholder="Company">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg" name="jobtitle" placeholder="Job title">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control input-lg" name="password" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
+                                <span class="pull-right"><a href="#/">Sign In</a></span><span><a href="#">Need help?</a></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                            
+                    </div>
+                </div>
+            </div>
+        </script>
 
-		<!-- dahsboard  -->
-		<script id="dahsboard-tpl" type="text/x-handlebars-template">
-			<div class="jumbotron">
-				<div class="container">
-					<h1>Helloon</h1>
-					<p>Welcome {{username}} !</p>
-				</div>
-			</div>
-		</script>
+        <!-- dahsboard  -->
+        <script id="dahsboard-tpl" type="text/x-handlebars-template">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1>Helloon</h1>
+                    <p>Welcome {{username}} !</p>
+                </div>
+            </div>
+        </script>
 
-		<!-- survey  -->
-		<script id="survey-tpl" type="text/x-handlebars-template">
-			<div class="container-fluid" style="">
-				<div class="row">
-				    <div class="btn-group btn-breadcrumb">
-				        <!--  
-			            <a href="#" class="btn btn-default">
-			            	<i class="glyphicon glyphicon-home"></i>
-			            	</a>-->
-			            <a href="#" class="btn btn-default cat" value="category1">Category 1</a>
-			            <a href="#" class="btn btn-default cat">Category 2</a>
-			            <a href="#" class="btn btn-default cat">Category 3</a>
-			            <a href="#" class="btn btn-default cat">Category 4</a>
-			            <a href="#" class="btn btn-default cat">Category 5</a>
-			            <a href="#" class="btn btn-default cat">Category 6</a>
-			        </div>
-				</div>
-				<div class="row" style="margin-top:10px">
-					<div class="list-group">
-						<a href="#" class="list-group-item active">
-						<h4 class="list-group-item-heading">Category 1</h4>
-						<p class="list-group-item-text">
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-						</p>
-						</a>
-					</div>
-					<div class="container-fluid">
-						<strong>
-							<p> 2. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-							</p>
-						</strong>
-						<div class="container-fluid" style="">
-							<div class="list-group">
-								<button type="button" class="list-group-item">
-								1. Cras justo odio
-								</button>
-								
-								<button type="button" class="list-group-item">
-								2. Dapibus ac facilisis in</button>
-								
-								<button type="button" class="list-group-item">
-								3. Morbi leo risus</button>
-								
-								<button type="button" class="list-group-item">
-								4. Porta ac consectetur ac</button>
-								
-								<button type="button" class="list-group-item">
-								5. Vestibulum at eros</button>
-							</div>
-						</div>
-					</div> 
-					<nav class="text-right">
-						<ul class="pagination">
-							<li>
-								<a href="#" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li>
-							<a href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							</a>
-							</li>
-						</ul>
-					</nav>	
-				</div>
-			</div>
-		</script>
+        <!-- survey  -->
+        <script id="survey-tpl" type="text/x-handlebars-template">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="btn-group btn-breadcrumb">
+                     
+                    <a href="#" class="btn btn-default">
+                        <i class="glyphicon glyphicon-home"></i>
+                    </a>
+                    {{#each categories}}
+                        <a href="#" class="btn btn-default cat">
+                            {{name}}
+                        </a>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">{{questions.category}}</h4>
+                    <p class="list-group-item-text">
+                        {{questions.description}}
+                    </p>
+                    </a>
+                </div>
+                <!-- <div id="dynamic-content"></div>-->
+                {{#each questions.questions}}
+                    <div id="dynamic-content" class="container-fluid">
+                    <strong>
+                        <p> {{this.question}}</p>
+                    </strong>
+                    <div class="container-fluid">
+                        <div class="list-group">
+                            {{#each this.choice}}
+                            <button type="button" class="list-group-item">
+                            {{this}}
+                            </button>
+                            {{/each}}
+                            
+                        </div>
+                    </div>
+                    </div>
+                {{/each}}   
+                <nav class="text-right">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                        <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        </li>
+                    </ul>
+                </nav>  
+            </div>
+        </div>
 
-		<!-- reset password  -->
-		<script id="resetpass-tpl" type="text/x-handlebars-template">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="text-center">Reset Password</h1>
-					</div>
-					<div class="modal-body">
-						<form id="form-reset-pass" class="form col-md-12 center-block">
-							<div class="form-group">
-								<input type="text" class="form-control input-lg" name="email" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-primary btn-lg btn-block">Send
-								</button>
-								<span class="pull-right"><a href="#/login">Login</a>
-								</span>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-							
-					</div>
-				</div>
-			</div>
-		</script>
+            
+        </script>
+        <script id="test-tpl" type="text/x-handlebars-template">
+            <div class="container-fluid">
+            {{content}}
+            </div>
+        </script>
 
-		<!-- navbar -->
-		<script id="navbar-tpl" type="text/x-handlebars-template">
-			<nav class="navbar navbar-default custom-nav" style="">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#/admin/home">
-							<img alt="Brand" width="100" src="logo.png">
-						</a>
+        <!-- reset password  -->
+        <script id="resetpass-tpl" type="text/x-handlebars-template">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center">Reset Password</h1>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-reset-pass" class="form col-md-12 center-block">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-lg" name="email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Send
+                                </button>
+                                <span class="pull-right"><a href="#/login">Login</a>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                            
+                    </div>
+                </div>
+            </div>
+        </script>
 
-					</div>
-					<p class="navbar-text navbar-left" style="color:white">Benchmark for the company {{company}}</p>
-					<ul class="nav navbar-nav navbar-right">
-						{{#if username}}
-						<li>
-							<a href="#/admin/assessment" style="color:white">Start Assessment
-							</a>
-						</li>
-						<li class="dropdown">
-							<a style="color:white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{fname}} <span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#/admin/home">{{username}}</a></li>
-								<li role="separator" class="divider"></li>
-								<li><a href="#/logout">Logout</a></li>
-							</ul>
-						</li>
-						{{/if}}
-					</ul>
-					
-				</div>
-			</nav>
-		</script>
+        <!-- navbar -->
+        <script id="navbar-tpl" type="text/x-handlebars-template">
+            <nav class="navbar navbar-default custom-nav" style="">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#/admin/home">
+                            <img alt="Brand" width="100" src="logo.png">
+                        </a>
 
-		<!-- navbar not logged -->
-		<script id="navbar-not-logged-tpl" type="text/x-handlebars-template">
-			<nav class="navbar navbar-default custom-nav" style="">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#">
-							<img alt="Brand" width="100" src="logo.png">
-						</a>
-						<p class="navbar-text navbar-left" style="color:white">Benchmarking Centre</p>
-					</div>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a href="#/assessment" style="color:white">Start Assessment
-							</a>
-						</li>
-						<li>
-							<a id="open-login" data-toggle="modal" data-target="#loginModal" style="color:white;float:left;padding-right:0px">Login /
-							</a>
-							<a data-toggle="modal" data-target="#SignUpModal" style="color:white;float:left;padding-left:0px">&nbspSign Up
-							</a>
-						</li>
-						
-					</ul>
-				</div>
+                    </div>
+                    <p class="navbar-text navbar-left" style="color:white">Benchmark for the company {{company}}</p>
+                    <ul class="nav navbar-nav navbar-right">
+                        {{#if username}}
+                        <li>
+                            <a href="#/admin/assessment" style="color:white">Start Assessment
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a style="color:white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{fname}} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#/admin/home">{{username}}</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                        {{/if}}
+                    </ul>
+                    
+                </div>
+            </nav>
+        </script>
 
-			</nav>
-			
-			<!-- Login Modal -->
-			<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h1 class="text-center">Login</h1>
-						</div>
-						<div class="modal-body">
-							<form id="form-sign-in" class="form col-md-12 center-block">
-								<div class="form-group">
-									<input type="text" class="form-control input-lg" name="username" placeholder="Email">
-								</div>
-								<div class="form-group">
-									<input type="password" class="form-control input-lg" name="password" placeholder="Password">
-								</div>
-								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
-									<span class="pull-right">
-										<a data-toggle="modal" data-target="#SignUpModal" data-dismiss="modal" aria-hidden="true">&nbspSign Up
-										</a>
-									</span>
-									<span>
-										<a data-toggle="modal" data-target="#recoveryPasswordModal" data-dismiss="modal" aria-hidden="true">forgot password?
-										</a>
-									</span>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-								
-						</div>
-					</div>
-				</div>
-			</div>
+        <!-- navbar not logged -->
+        <script id="navbar-not-logged-tpl" type="text/x-handlebars-template">
+            <nav class="navbar navbar-default custom-nav" style="">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img alt="Brand" width="100" src="logo.png">
+                        </a>
+                        <p class="navbar-text navbar-left" style="color:white">Benchmarking Centre</p>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#/assessment" style="color:white">Start Assessment
+                            </a>
+                        </li>
+                        <li>
+                            <a id="open-login" data-toggle="modal" data-target="#loginModal" style="color:white;float:left;padding-right:0px">Login /
+                            </a>
+                            <a data-toggle="modal" data-target="#SignUpModal" style="color:white;float:left;padding-left:0px">&nbspSign Up
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+            </nav>
+            
+            <!-- Login Modal -->
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h1 class="text-center">Login</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-sign-in" class="form col-md-12 center-block">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-lg" name="username" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control input-lg" name="password" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+                                    <span class="pull-right">
+                                        <a data-toggle="modal" data-target="#SignUpModal" data-dismiss="modal" aria-hidden="true">&nbspSign Up
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <a data-toggle="modal" data-target="#recoveryPasswordModal" data-dismiss="modal" aria-hidden="true">forgot password?
+                                        </a>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-			<!-- Sign Up Modal -->
-			<div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h1 class="text-center">Sign Up</h1>
-						</div>
-						<div class="modal-body">
-							<form id="formSignUp" class="form col-md-12 center-block" role="form">
-								<div class="form-group">
-									<input type="text" class="form-control input-lg" name="fname" placeholder="First Name">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control input-lg" name="lname" placeholder="Last Name">
-								</div>
-								<div class="form-group">
-									<input type="email" class="form-control input-lg" name="email" placeholder="Email">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control input-lg" name="company" placeholder="Company">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control input-lg" name="jobtitle" placeholder="Job title">
-								</div>
-								<div class="form-group">
-									<input type="password" class="form-control input-lg" name="password" placeholder="Password">
-								</div>
-								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
-									<span class="pull-right">
-										<a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" aria-hidden="true">Sign In
-										</a>
-									</span>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-								
-						</div>
-					</div>
-				</div>
-			</div>
+            <!-- Sign Up Modal -->
+            <div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h1 class="text-center">Sign Up</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formSignUp" class="form col-md-12 center-block" role="form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-lg" name="fname" placeholder="First Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-lg" name="lname" placeholder="Last Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control input-lg" name="email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-lg" name="company" placeholder="Company">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-lg" name="jobtitle" placeholder="Job title">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control input-lg" name="password" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
+                                    <span class="pull-right">
+                                        <a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" aria-hidden="true">Sign In
+                                        </a>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-			<!-- Recovery Password Modal -->
-			<div class="modal fade" id="recoveryPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h1 class="text-center">Reset Password</h1>
-						</div>
-						<div class="modal-body">
-							<form id="form-reset-pass" class="form col-md-12 center-block">
-								<div class="form-group">
-									<input type="text" class="form-control input-lg" name="email" placeholder="Email">
-								</div>
-								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-lg btn-block">Send
-									</button>
-									<span class="pull-right">
-										<a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" aria-hidden="true">Sign In
-										</a>
-									</span>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-								
-						</div>
-					</div>
-				</div>
-			</div>
+            <!-- Recovery Password Modal -->
+            <div class="modal fade" id="recoveryPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="text-center">Reset Password</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form-reset-pass" class="form col-md-12 center-block">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-lg" name="email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Send
+                                    </button>
+                                    <span class="pull-right">
+                                        <a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" aria-hidden="true">Sign In
+                                        </a>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-		</script>
+        </script>
 
-		<!-- assessment not logged  -->
-		<script id="assessment-tpl" type="text/x-handlebars-template">
-			<div class="jumbotron">
-				<div class="container">
-					<h1>Assessment</h1>
-				</div>
-			</div>
-		</script>
+        <!-- assessment not logged  -->
+        <script id="assessment-tpl" type="text/x-handlebars-template">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1>Assessment</h1>
+                </div>
+            </div>
+        </script>
 
-		<!-- assessment logged  -->
-		<script id="logged-assessment-tpl" data-scrollable="y" type="text/x-handlebars-template">
-			<div class="jumbotron">
-				<div class="container">
-					<h2>Assessment</h2>
-					<div class="row">
-						<div class="col-xs-6 col-md-6">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Available Assessments</h3>
-								</div>
-								<div class="panel-body">
-									<div class="list-group">
-										<a href="#" class="list-group-item">
-										Cras justo odio
-										</a>
-										<a href="#" class="list-group-item">Dapibus ac facilisis in
-										</a>
-										<a href="#" class="list-group-item">Morbi leo risus
-										</a>
-										<a href="#" class="list-group-item">Porta ac consectetur ac
-										</a>
-										<a href="#" class="list-group-item">Vestibulum at eros
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-	  					<div class="col-xs-6 col-md-6">
-	  						<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Completed Assessments</h3>
-								</div>
-								<div class="panel-body">
-									<div class="list-group">
-										<a href="#" class="list-group-item">
-										Cras justo odio
-										</a>
-										<a href="#" class="list-group-item">Dapibus ac facilisis in
-										</a>
-										<a href="#" class="list-group-item">Morbi leo risus
-										</a>
-										
-									</div>
-								</div>
-							</div>
-	  					</div>
-						
-					</div>
+        <!-- assessment logged  -->
+        <script id="logged-assessment-tpl" data-scrollable="y" type="text/x-handlebars-template">
+            <div class="jumbotron">
+                <div class="container">
+                    <h2>Assessment</h2>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Available Assessments</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item">
+                                        Cras justo odio
+                                        </a>
+                                        <a href="#" class="list-group-item">Dapibus ac facilisis in
+                                        </a>
+                                        <a href="#" class="list-group-item">Morbi leo risus
+                                        </a>
+                                        <a href="#" class="list-group-item">Porta ac consectetur ac
+                                        </a>
+                                        <a href="#" class="list-group-item">Vestibulum at eros
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Completed Assessments</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item">
+                                        Cras justo odio
+                                        </a>
+                                        <a href="#" class="list-group-item">Dapibus ac facilisis in
+                                        </a>
+                                        <a href="#" class="list-group-item">Morbi leo risus
+                                        </a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
 
-					<h2>Results</h2>
-					<div class="row">
-						<div class="col-xs-6 col-md-6">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Assessments 1</h3>
-								</div>
-								<div class="panel-body">
-									<canvas id="myChart1" width="500" height="400">
-									</canvas>
-									<div class="container" style="margin-top: 20px;">
-										<table class="table table-bordered">
-											<thead>
-												<tr>
-													<th>Firstname</th>
-													<th>Lastname</th>
-													<th>Email</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>John</td>
-													<td>Doe</td>
-													<td>john@example.com</td>
-												</tr>
-												<tr>
-													<td>Mary</td>
-													<td>Moe</td>
-													<td>mary@example.com</td>
-												</tr>
-												<tr>
-													<td>July</td>
-													<td>Dooley</td>
-													<td>july@example.com</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-	  					<div class="col-xs-6 col-md-6">
-	  						<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Assessments 2</h3>
-								</div>
-								<div class="panel-body">
-									<canvas id="myChart2" width="500" height="400">
-									</canvas>
-									<div class="container" style="margin-top: 20px;">
-										<table class="table table-bordered">
-											<thead>
-												<tr>
-													<th>Firstname</th>
-													<th>Lastname</th>
-													<th>Email</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>John</td>
-													<td>Doe</td>
-													<td>john@example.com</td>
-												</tr>
-												<tr>
-													<td>Mary</td>
-													<td>Moe</td>
-													<td>mary@example.com</td>
-												</tr>
-												<tr>
-													<td>July</td>
-													<td>Dooley</td>
-													<td>july@example.com</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-	  					</div>
-						
-					</div>
-					<div class="row">
-						<div class="col-xs-6 col-md-6">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Assessments 3</h3>
-								</div>
-								<div class="panel-body">
-									<canvas id="myChart3" width="500" height="400">
-									</canvas>
-									<div class="container" style="margin-top: 20px;">
-										<table class="table table-bordered">
-											<thead>
-												<tr>
-													<th>Firstname</th>
-													<th>Lastname</th>
-													<th>Email</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>John</td>
-													<td>Doe</td>
-													<td>john@example.com</td>
-												</tr>
-												<tr>
-													<td>Mary</td>
-													<td>Moe</td>
-													<td>mary@example.com</td>
-												</tr>
-												<tr>
-													<td>July</td>
-													<td>Dooley</td>
-													<td>july@example.com</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-	  					<div class="col-xs-6 col-md-6">
-	  						<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">Assessments 4</h3>
-								</div>
-								<div class="panel-body">
-									<canvas id="myChart4" width="500" height="400">
-									</canvas>
-									<div class="container" style="margin-top: 20px;">
-										<table class="table table-bordered">
-											<thead>
-												<tr>
-													<th>Firstname</th>
-													<th>Lastname</th>
-													<th>Email</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>John</td>
-													<td>Doe</td>
-													<td>john@example.com</td>
-												</tr>
-												<tr>
-													<td>Mary</td>
-													<td>Moe</td>
-													<td>mary@example.com</td>
-												</tr>
-												<tr>
-													<td>July</td>
-													<td>Dooley</td>
-													<td>july@example.com</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-	  					</div>
-						
-					</div>
-				</div>
-			</div>
-			<script type="text/javascript">
-				var ctx1 = $("#myChart1").get(0).getContext("2d");
-				var ctx2 = $("#myChart2").get(0).getContext("2d");
-				var ctx3 = $("#myChart3").get(0).getContext("2d");
-				var ctx4 = $("#myChart4").get(0).getContext("2d");
-				
-				var data = {
-				    labels: ["January", "February", "March", "April", "May", "June", "July"],
-				    datasets: [
-				        {
-				            label: "My First dataset",
-				            fillColor: "rgba(220,220,220,0.5)",
-				            strokeColor: "rgba(220,220,220,0.8)",
-				            highlightFill: "rgba(220,220,220,0.75)",
-				            highlightStroke: "rgba(220,220,220,1)",
-				            data: [65, 59, 80, 81, 56, 55, 40]
-				        },
-				        {
-				            label: "My Second dataset",
-				            fillColor: "rgba(151,187,205,0.5)",
-				            strokeColor: "rgba(151,187,205,0.8)",
-				            highlightFill: "rgba(151,187,205,0.75)",
-				            highlightStroke: "rgba(151,187,205,1)",
-				            data: [28, 48, 40, 19, 86, 27, 90]
-				        }
-				    ]
-				};
-				var myBarChart = new Chart(ctx1).Bar(data,{barShowStroke: false});
-				var myBarChart = new Chart(ctx2).Bar(data,{barShowStroke: false});
-				var myBarChart = new Chart(ctx3).Bar(data,{barShowStroke: false});
-				var myBarChart = new Chart(ctx4).Bar(data,{barShowStroke: false});
-			</script>
-		</script>
+                    <h2>Results</h2>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Assessments 1</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <canvas id="myChart1" width="500" height="400">
+                                    </canvas>
+                                    <div class="container" style="margin-top: 20px;">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Firstname</th>
+                                                    <th>Lastname</th>
+                                                    <th>Email</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>John</td>
+                                                    <td>Doe</td>
+                                                    <td>john@example.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mary</td>
+                                                    <td>Moe</td>
+                                                    <td>mary@example.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>July</td>
+                                                    <td>Dooley</td>
+                                                    <td>july@example.com</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Assessments 2</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <canvas id="myChart2" width="500" height="400">
+                                    </canvas>
+                                    <div class="container" style="margin-top: 20px;">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Firstname</th>
+                                                    <th>Lastname</th>
+                                                    <th>Email</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>John</td>
+                                                    <td>Doe</td>
+                                                    <td>john@example.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mary</td>
+                                                    <td>Moe</td>
+                                                    <td>mary@example.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>July</td>
+                                                    <td>Dooley</td>
+                                                    <td>july@example.com</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Assessments 3</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <canvas id="myChart3" width="500" height="400">
+                                    </canvas>
+                                    <div class="container" style="margin-top: 20px;">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Firstname</th>
+                                                    <th>Lastname</th>
+                                                    <th>Email</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>John</td>
+                                                    <td>Doe</td>
+                                                    <td>john@example.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mary</td>
+                                                    <td>Moe</td>
+                                                    <td>mary@example.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>July</td>
+                                                    <td>Dooley</td>
+                                                    <td>july@example.com</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Assessments 4</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <canvas id="myChart4" width="500" height="400">
+                                    </canvas>
+                                    <div class="container" style="margin-top: 20px;">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Firstname</th>
+                                                    <th>Lastname</th>
+                                                    <th>Email</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>John</td>
+                                                    <td>Doe</td>
+                                                    <td>john@example.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Mary</td>
+                                                    <td>Moe</td>
+                                                    <td>mary@example.com</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>July</td>
+                                                    <td>Dooley</td>
+                                                    <td>july@example.com</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var ctx1 = $("#myChart1").get(0).getContext("2d");
+                var ctx2 = $("#myChart2").get(0).getContext("2d");
+                var ctx3 = $("#myChart3").get(0).getContext("2d");
+                var ctx4 = $("#myChart4").get(0).getContext("2d");
+                
+                var data = {
+                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    datasets: [
+                        {
+                            label: "My First dataset",
+                            fillColor: "rgba(220,220,220,0.5)",
+                            strokeColor: "rgba(220,220,220,0.8)",
+                            highlightFill: "rgba(220,220,220,0.75)",
+                            highlightStroke: "rgba(220,220,220,1)",
+                            data: [65, 59, 80, 81, 56, 55, 40]
+                        },
+                        {
+                            label: "My Second dataset",
+                            fillColor: "rgba(151,187,205,0.5)",
+                            strokeColor: "rgba(151,187,205,0.8)",
+                            highlightFill: "rgba(151,187,205,0.75)",
+                            highlightStroke: "rgba(151,187,205,1)",
+                            data: [28, 48, 40, 19, 86, 27, 90]
+                        }
+                    ]
+                };
+                var myBarChart = new Chart(ctx1).Bar(data,{barShowStroke: false});
+                var myBarChart = new Chart(ctx2).Bar(data,{barShowStroke: false});
+                var myBarChart = new Chart(ctx3).Bar(data,{barShowStroke: false});
+                var myBarChart = new Chart(ctx4).Bar(data,{barShowStroke: false});
+            </script>
+        </script>
 
-		
+        
 
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-		
-		<!-- survey.js -->
-		<script src="js/survey.js"></script>
-	</body>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        
+        <!-- survey.js -->
+        <script src="js/survey.js"></script>
+    </body>
 </html>
