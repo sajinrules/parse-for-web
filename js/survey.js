@@ -218,35 +218,124 @@ $(function() {
     SurveyView = Parse.View.extend({
         template: Handlebars.compile($('#survey-tpl').html()),
         events:{
-            'click a.cat' : 'catSelect'
+            'click a.cat' : 'catSelect',
+            'click ul.pagination a.page':'pagination'
+        },
+        getQuestion:function(selected,from,to){
+          var a;
+          $.each(qa,function(key,value){
+            if(value.category==selected){
+              value.questions=value.questions.slice(from,to);
+              console.log("value:",value);
+              a=value;    
+              return false;
+            }
+          })
+          return a;
         },
         catSelect: function(e){
           var selected = $(e.target).text().trim();
-          qaFiltered=[];
-          qaFiltered=qa.filter(function(item){
-            return item.category===selected;
-          });
-          console.log("qaFiltered:",qaFiltered);
+          var qaFiltered=this.getQuestion(selected,0,3)
           var source = $("#survey-tpl").html();
           var template = Handlebars.compile(source);
-          var html = template({categories:categories,questions:qaFiltered[0]});
+          var html = template({categories:categories,questions:qaFiltered});
           this.$el.html(html);
 
           e.preventDefault();
         },
+        pagination : function(e){
+          e.preventDefault();
+          var limit=3;
+          console.log("clicked:",$(e.target).text().trim());
+          $('li.list').removeClass('active')
+          $(e.target).parent('li.list').addClass('active')
+        },
         render: function() {
-            console.log("this.$el:",this.$el);
-            this.$el.html(this.template({categories:categories,questions:qa[0]}));
-            /*var source = $("#test-tpl").html();
-            var template = Handlebars.compile(source);
-            var html = template({questions:qa[0]});
-            $('#dynamic-content').html(html);*/
+            var qaFiltered=this.getQuestion('Category 1',0,3)
+            this.$el.html(this.template({categories:categories,questions:qaFiltered}));
         }
     }),
 
 
     NavbarView = Parse.View.extend({
         template: Handlebars.compile($('#navbar-tpl').html()),
+        events: {
+            'submit #form-sign-in': 'login',
+            'submit #formSignUp': 'signUp',
+            'submit #form-reset-pass': 'resetPassword'
+        },
+        login: function(e) {
+            //console.log("e:",e);
+            e.preventDefault();
+            var data = $("#form-sign-in").serializeArray(),
+                username = data[0].value,
+                password = data[1].value;
+
+            Parse.User.logIn(username, password, {
+                success: function(user) {
+                    $(".modal-backdrop").css("display", "none");
+                    $("body").css("overflow", "auto");
+                    blogRouter.navigate('#/admin/home', { trigger: true });
+                },
+                error: function(user, error) {
+                    if(error.code===101)
+                        alert("The email and password you entered don't match. Please reset your password if needed.");
+                    else
+                        alert(error.message);
+                }
+            });
+        },
+        signUp: function(e) {
+            //console.log("e:",e);
+            e.preventDefault();
+            var currentUser = Parse.User.current();
+                if (currentUser) {
+                    Parse.User.logOut();
+                }
+            // Get data from the form and put them into variables
+            var data = $("#formSignUp").serializeArray(),
+                fname = data[0].value,
+                lname = data[1].value,
+                email = data[2].value,
+                company = data[3].value;
+                jobtitle = data[4].value;
+                password = data[5].value;
+                Name = fname+" "+lname;
+            
+            var user = new Parse.User();
+            user.set("Name",Name);
+            user.set("fname",fname);
+            user.set("lname",lname);
+            user.set("email",email);
+            user.set("username",email);
+            user.set("company",company);
+            user.set("jobtitle",jobtitle);
+            user.set("password",password);
+            user.signUp(null, {
+                success: function(user) {
+                    $(".modal-backdrop").css("display", "none");
+                    blogRouter.navigate('#/admin/home', { trigger: true });
+                },
+                error: function(user, error) {
+                    alert("Error: "+ error.message);
+                }
+            });
+        },
+        resetPassword: function(e) {
+            e.preventDefault();
+            var data = $("#form-reset-pass").serializeArray(),
+                email = data[0].value;
+            
+            Parse.User.requestPasswordReset(email, {
+                success: function(data) {
+                    $(".modal-backdrop").css("display", "none");
+                    blogRouter.navigate('#/', { trigger: true });
+                },
+                error: function(error) {
+                    alert("Error: " + error.code + " " + error.message);
+                }
+            });
+        },
         render: function() {
             var collection = { 
                 username: this.options.username,
@@ -257,7 +346,7 @@ $(function() {
         }
     }),
 
-    NavbarViewNotLogged = Parse.View.extend({
+    /*NavbarViewNotLogged = Parse.View.extend({
         template: Handlebars.compile($('#navbar-not-logged-tpl').html()),
         events: {
             'submit #form-sign-in': 'login',
@@ -339,7 +428,7 @@ $(function() {
         render: function() {
             this.$el.html(this.template());
         }
-    }),
+    }),*/
     
     AssessmentView = Parse.View.extend({
         template: Handlebars.compile($('#assessment-tpl').html()),
@@ -433,9 +522,19 @@ $(function() {
             *
             * navbar not logged render
             **/
-            var navbarViewNotLogged = new NavbarViewNotLogged();
-            navbarViewNotLogged.render();
-            $('.navbar-container').html(navbarViewNotLogged.el);
+            var currentUser = Parse.User.current();
+            if(currentUser){
+              var navbarView = new NavbarView({
+                username: currentUser.get('username'),
+                fname: currentUser.get('fname'),
+                company:currentUser.get('company')
+              });
+            }else{
+              var navbarView = new NavbarView();
+            }
+            
+            navbarView.render();
+            $('.navbar-container').html(navbarView.el);
             
             /*
             *
@@ -450,9 +549,19 @@ $(function() {
             *
             * navbar not logged render
             **/
-            var navbarViewNotLogged = new NavbarViewNotLogged();
-            navbarViewNotLogged.render();
-            $('.navbar-container').html(navbarViewNotLogged.el);
+            var currentUser = Parse.User.current();
+            if(currentUser){
+              var navbarView = new NavbarView({
+                username: currentUser.get('username'),
+                fname: currentUser.get('fname'),
+                company:currentUser.get('company')
+              });
+            }else{
+              var navbarView = new NavbarView();
+            }
+            
+            navbarView.render();
+            $('.navbar-container').html(navbarView.el);
             
             /*
             *
@@ -500,6 +609,8 @@ $(function() {
         }
     }),
     blogRouter = new BlogRouter();
-    
+    Handlebars.registerHelper("inc", function(value, options){
+        return parseInt(value) + 1;
+    });
     blogRouter.start();
 });
