@@ -141,12 +141,13 @@
                 {{#each questions.questions}}
                   <div id="dynamic-content" class="container-fluid">
                     <strong>
-                      <p>{{inc @index}}. {{this.question}}</p>
+                      <p>{{setIndex @index}}. {{this.question}}</p>
                     </strong>
                     <div class="container-fluid">
                       <div class="list-group">
                         {{#each this.choice}}
-                          <button type="button" class="list-group-item">
+                          <button value={{../index}}-{{inc @index}} type="button" 
+                          class="list-group-item choice {{../index}}">
                             {{this}}
                           </button>
                         {{/each}}

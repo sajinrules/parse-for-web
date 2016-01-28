@@ -219,7 +219,8 @@ $(function() {
         template: Handlebars.compile($('#survey-tpl').html()),
         events:{
             'click a.cat' : 'catSelect',
-            'click ul.pagination a.page':'pagination'
+            'click ul.pagination a.page':'pagination',
+            'click button.choice' : 'selectChoice'
         },
         getQuestion:function(selected,from,to){
           var a;
@@ -249,6 +250,11 @@ $(function() {
           console.log("clicked:",$(e.target).text().trim());
           $('li.list').removeClass('active')
           $(e.target).parent('li.list').addClass('active')
+        },
+        selectChoice:function(e){
+          var queNo= "."+$(e.target).val().split('-')[0];
+          var other =$(queNo).removeClass('active');
+          $(e.target).addClass('active');
         },
         render: function() {
             var qaFiltered=this.getQuestion('Category 1',0,3)
@@ -611,6 +617,11 @@ $(function() {
     blogRouter = new BlogRouter();
     Handlebars.registerHelper("inc", function(value, options){
         return parseInt(value) + 1;
+    });
+
+    Handlebars.registerHelper('setIndex', function(value){
+        this.index = Number(value + 1);
+        return parseInt(value) + 1; //I needed human readable index, not zero based
     });
     blogRouter.start();
 });
